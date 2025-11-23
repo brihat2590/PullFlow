@@ -1,28 +1,37 @@
 "use client";
 
 import { signIn, useSession } from "next-auth/react";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Toaster, toast } from "sonner";
 
 export default function LoginPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const [hasRedirected, setHasRedirected] = useState(false);
 
   // Redirect if already logged in
   useEffect(() => {
     if (status === "authenticated") {
-      router.push("/dashboard"); // redirect to dashboard
+      if (!hasRedirected) {
+        toast.success("Logged in successfully! Redirecting...");
+        router.push("/dashboard");
+        setHasRedirected(true); // prevent infinite loop
+      }
     }
-  }, [status, router]);
+  }, [status, router, hasRedirected]);
 
   const signInWithGithub = async () => {
+    // Use callbackUrl to redirect after successful OAuth
     await signIn("github", { callbackUrl: "/dashboard" });
-    // After successful login, user will be redirected automatically to /dashboard
+    // Do NOT show toast here because OAuth redirects away
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-900 text-white">
-      <div className="max-w-md w-full mx-auto p-8 border border-gray-700 bg-gray-800 rounded-xl shadow-2xl text-center">
+    <div className="min-h-screen flex items-center justify-center bg-black text-white">
+      <Toaster position="top-right" richColors />
+      <div className="max-w-md w-full mx-auto p-8 border border-gray-700  rounded-xl shadow-2xl text-center">
         <h1 className="text-3xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
           Welcome Back
         </h1>

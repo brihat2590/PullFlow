@@ -30,7 +30,7 @@ export default function RootLayout({
     <html lang="en">
       
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`font-italic antialiased`}
       >
         <Toaster position="top-right" />
         <ProviderWrapper>{children}</ProviderWrapper>
