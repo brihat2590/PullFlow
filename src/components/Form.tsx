@@ -4,8 +4,10 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import ReactMarkdown from "react-markdown";
 import { Loader2 } from "lucide-react";
 import { marked } from "marked";
+import remarkGfm from "remark-gfm";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -42,7 +44,7 @@ export function ReviewForm() {
     defaultValues: {
       owner: "",
       repo: "",
-      prNumber: undefined,
+      prNumber: 0,
     },
   });
 
@@ -82,7 +84,7 @@ export function ReviewForm() {
                 <FormItem>
                   <FormLabel>Repository Owner</FormLabel>
                   <FormControl>
-                    <Input placeholder="e.g., vercel" {...field} />
+                    <Input placeholder="eg: Brihat" {...field} />
                   </FormControl>
                   <FormDescription>
                     The GitHub username or organization
@@ -99,7 +101,7 @@ export function ReviewForm() {
                 <FormItem>
                   <FormLabel>Repository Name</FormLabel>
                   <FormControl>
-                    <Input placeholder="e.g., next.js" {...field} />
+                    <Input placeholder="eg: MyRepo" {...field} />
                   </FormControl>
                   <FormDescription>The name of the repository</FormDescription>
                   <FormMessage />
@@ -152,19 +154,20 @@ export function ReviewForm() {
         </Card>
       )}
 
-      {feedback && (
-        <div className="rounded-lg border bg-white p-6 shadow-sm dark:border-gray-800 dark:bg-gray-900">
-          <h2 className="mb-4 text-xl font-semibold text-gray-800 dark:text-white">
-            AI Review Feedback
-          </h2>
+{feedback && (
+  <div className="rounded-xl borderp-6 shadow-sm dark:border-gray-800 pt-10 dark:bg-gray-900">
+    <h2 className="mb-4 text-center text-4xl  bg-gradient-to-r from-neutral-300 to-neutral-500 bg-clip-text text-transparent pb-5">
+      AI Review Feedback
+    </h2>
 
-          {/* Render markdown as HTML using marked */}
-          <div
-            className="prose max-w-none dark:prose-invert"
-            dangerouslySetInnerHTML={{ __html: marked(feedback) }}
-          />
-        </div>
-      )}
+    {/* Styled Markdown Renderer */}
+    <div className="prose prose-lg dark:prose-invert max-w-none leading-relaxed text-neutral-300 px-2">
+      <ReactMarkdown remarkPlugins={[remarkGfm]}>
+        {feedback}
+      </ReactMarkdown>
+    </div>
+  </div>
+)}
     </div>
   );
 }
