@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { GitPullRequest } from "lucide-react"
+import { useSession } from "next-auth/react"
 
 interface PullRequest {
   id: number
@@ -25,13 +26,19 @@ export default function PullRequests({
 }) {
   const [prs, setPrs] = useState<PullRequest[]>([])
   const [loading, setLoading] = useState(true)
+  const{data:session}=useSession();
 
   useEffect(() => {
+    if(!session?.accessToken){
+      return
+    }
     const fetchPRs = async () => {
       try {
         setLoading(true)
         const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/pulls?state=open&per_page=5`, {
-          headers: { Accept: "application/vnd.github.v3+json" },
+          headers: { Accept: "application/vnd.github.v3+json",
+            Authorization: `Bearer ${session?.accessToken}`
+           },
         })
         const data = await res.json()
         setPrs(Array.isArray(data) ? data : [])
