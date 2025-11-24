@@ -16,14 +16,17 @@ export default function Repos() {
     const fetchRepos = async () => {
       setLoading(true)
       try {
-        const res = await fetch("https://api.github.com/user/repos?sort=updated&direction=desc", {
-          headers: { Authorization: `Bearer ${session.accessToken}` },
-        })
+        const res = await fetch(
+          "https://api.github.com/user/repos?sort=updated&direction=desc&per_page=100",
+          {
+            headers: { Authorization: `Bearer ${session.accessToken}` },
+          }
+        )
         const data = await res.json()
         if (Array.isArray(data)) {
-            setRepos(data)
+          setRepos(data)
         } else {
-            setRepos([])
+          setRepos([])
         }
       } catch (error) {
         console.error("Failed to fetch repos", error)
@@ -64,17 +67,49 @@ export default function Repos() {
   return (
     <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-gray-950">
       <div className="max-w-7xl mx-auto">
-        <div className="mb-12">
+        <div className="mb-10">
           <div className="flex items-center gap-3 mb-3">
-            <div className="p-3  ">
-                <Code2 className="w-8 h-8 text-blue-500" />
+            <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 shadow-sm shadow-blue-500/10">
+              <Code2 className="w-8 h-8 text-blue-500" />
             </div>
-            <h1 className="text-4xl font-italic text-white tracking-tight ">Your Repositories</h1>
+            <h1 className="text-3xl sm:text-4xl font-semibold text-white tracking-tight">
+              Your Repositories
+            </h1>
           </div>
-          <p className="text-slate-400 font-italic text-lg ml-1">Manage and review your GitHub projects</p>
-          <div className="mt-4 inline-flex items-center px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-sm text-slate-400">
-            <span>Total repositories:</span>
-            <span className="ml-2 text-white font-semibold">{repos.length}</span>
+          <p className="text-slate-400 text-sm sm:text-base ml-1">
+            Manage and review your GitHub projects
+          </p>
+
+          {/* compact "inputs" with animation */}
+          <div className="mt-6 flex flex-wrap items-center gap-4">
+            <div className="relative group w-full sm:w-64">
+              <input
+                readOnly
+                value={repos.length}
+                className="w-full px-3 py-2 rounded-lg bg-slate-900/70 border border-slate-800 text-sm text-slate-200 shadow-sm
+                           focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/40
+                           transition-all duration-200 ease-out
+                           group-hover:border-slate-700
+                           placeholder:text-slate-500"
+                placeholder="Total repositories"
+              />
+              <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-xs text-slate-500">
+                total
+              </span>
+            </div>
+
+            <div className="relative group w-full sm:w-72">
+              <input
+                readOnly
+                value="GitHub · Updated desc · 100 per page"
+                className="w-full px-3 py-2 rounded-lg bg-slate-900/70 border border-slate-800 text-xs text-slate-300 shadow-sm
+                           focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/40
+                           transition-all duration-200 ease-out
+                           group-hover:border-slate-700
+                           placeholder:text-slate-500"
+              />
+              <div className="pointer-events-none absolute inset-x-2 -bottom-0.5 h-px bg-gradient-to-r from-transparent via-blue-500/60 to-transparent opacity-0 group-focus-within:opacity-100 transition-opacity duration-300" />
+            </div>
           </div>
         </div>
 
@@ -96,7 +131,9 @@ export default function Repos() {
                         className="text-xl font-bold text-white hover:text-blue-400 transition-colors truncate group-hover:text-blue-400 flex items-center gap-2"
                       >
                         {repo.name}
-                        <span className="text-slate-500 font-normal text-base">/ {repo.owner.login}</span>
+                        <span className="text-slate-500 font-normal text-base">
+                          / {repo.owner.login}
+                        </span>
                       </a>
                     </div>
                   </div>
@@ -128,20 +165,29 @@ export default function Repos() {
               <div className="px-6 py-3 bg-slate-900/80 flex flex-wrap gap-6 text-sm border-b border-slate-800">
                 <div className="flex items-center gap-2 text-slate-400 hover:text-yellow-400 transition-colors cursor-default">
                   <Star className="w-4 h-4" />
-                  <span className="font-medium">{repo.stargazers_count.toLocaleString()}</span>
+                  <span className="font-medium">
+                    {repo.stargazers_count.toLocaleString()}
+                  </span>
                 </div>
                 <div className="flex items-center gap-2 text-slate-400 hover:text-emerald-400 transition-colors cursor-default">
                   <GitFork className="w-4 h-4" />
-                  <span className="font-medium">{repo.forks_count.toLocaleString()}</span>
+                  <span className="font-medium">
+                    {repo.forks_count.toLocaleString()}
+                  </span>
                 </div>
                 <div className="flex items-center gap-2 text-slate-400 hover:text-blue-400 transition-colors cursor-default">
                   <Eye className="w-4 h-4" />
-                  <span className="font-medium">{repo.watchers_count.toLocaleString()}</span>
+                  <span className="font-medium">
+                    {repo.watchers_count.toLocaleString()}
+                  </span>
                 </div>
                 {repo.topics && repo.topics.length > 0 && (
                   <div className="flex flex-wrap gap-2 ml-auto">
                     {repo.topics.slice(0, 3).map((topic: string) => (
-                      <span key={topic} className="text-xs px-2 py-0.5 bg-slate-800 text-slate-400 border border-slate-700 rounded-full">
+                      <span
+                        key={topic}
+                        className="text-xs px-2 py-0.5 bg-slate-800 text-slate-400 border border-slate-700 rounded-full"
+                      >
                         {topic}
                       </span>
                     ))}
