@@ -2,13 +2,13 @@
 
 import { signIn, useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter,  } from "next/navigation";
 import { Toaster, toast } from "sonner";
 
 export default function LoginPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const searchParams = useSearchParams();
+  
   const [hasRedirected, setHasRedirected] = useState(false);
 
   // Redirect if already logged in
