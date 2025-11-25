@@ -65,23 +65,23 @@ export default function Repos() {
   }
 
   return (
-    <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-gray-950">
+    <div className="min-h-screen py-12 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gray-950">
       <div className="max-w-7xl mx-auto">
         <div className="mb-10">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="p-3 rounded-xl bg-slate-900/80 border border-slate-800 shadow-sm shadow-blue-500/10">
-              <Code2 className="w-8 h-8 text-blue-500" />
+          <div className="flex justify-center items-center gap-3 mb-3">
+            <div className="p-3  rounded-xl bg-slate-900/80 border border-slate-800 shadow-sm shadow-blue-500/10">
+              <Code2 className="w-8 h-8 " />
             </div>
-            <h1 className="text-3xl sm:text-4xl font-semibold text-white tracking-tight">
+            <h1 className=" sm:text-4xl bg-linear-to-r from-neutral-300 to-neutral-500 text-transparent bg-clip-text text-4xl tracking-tight ">
               Your Repositories
             </h1>
           </div>
-          <p className="text-slate-400 text-sm sm:text-base ml-1">
+          <p className="text-slate-400 text-sm sm:text-base ml-1 text-center">
             Manage and review your GitHub projects
           </p>
 
           {/* compact "inputs" with animation */}
-          <div className="mt-6 flex flex-wrap items-center gap-4">
+          <div className="mt-6 justify-center flex flex-wrap items-center gap-4">
             <div className="relative group w-full sm:w-64">
               <input
                 readOnly

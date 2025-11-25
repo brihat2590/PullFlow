@@ -38,7 +38,7 @@ export default function DashboardPage() {
           <div className="flex items-center ">
             
             <span className="text-lg font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 hidden sm:block">
-              PULL
+              PULLFLOW
             </span>
           </div>
 

@@ -32,10 +32,10 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-black text-white">
       <Toaster position="top-right" richColors />
       <div className="max-w-md w-full mx-auto p-8 border border-gray-700  rounded-xl shadow-2xl text-center">
-        <h1 className="text-3xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
+        <h1 className="text-3xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-neutral-200 to-neutral-500">
           Welcome Back
         </h1>
-        <p className="text-gray-400 mb-8">Sign in to continue to your account</p>
+        <p className="text-gray-400 mb-8">Sign in to continue.. </p>
 
         <button
           onClick={signInWithGithub}

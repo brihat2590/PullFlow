@@ -5,9 +5,9 @@ import { generateText } from "ai";
 import { google } from "@ai-sdk/google";
 // import { getServerSession } from "next-auth/next";
 // import {authOptions} from "@/app/api/auth/[...nextauth]/route"
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { getServerSession } from "next-auth/next";
 import { getGitHubToken } from "./token";
+
+
 
 // Define Zod schema for the form input
 const reviewInputSchema = z.object({
@@ -30,13 +30,16 @@ type ReviewState = z.infer<typeof stateSchema>;
 // Fetch GitHub PR diff
 async function fetchPullRequestDiff(state: ReviewState): Promise<ReviewState> {
   const url = `https://api.github.com/repos/${state.owner}/${state.repo}/pulls/${state.prNumber}`;
+
   const token=await getGitHubToken();
+  console.log("the token from the server",token)
+  
 
   try {
     const response = await fetch(url, {
       headers: {
         Accept: "application/vnd.github.v3.diff",
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
       },
     });
 
@@ -126,14 +129,14 @@ async function postPRComment(state: ReviewState): Promise<void> {
   // if(!session?.accessToken){
   //   throw new Error("No access token found in session");
   // }
-  const token=await getGitHubToken();
+  
 
   try {
     const response = await fetch(url, {
       method: "POST",
       headers: {
         Accept: "application/vnd.github+json",
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
