@@ -155,16 +155,21 @@ export function ReviewForm() {
       )}
 
 {feedback && (
-  <div className="rounded-xl borderp-6 shadow-sm dark:border-gray-800 pt-10 dark:bg-gray-900">
+  <div className="rounded-xl border p-6 shadow-sm dark:border-gray-800 pt-10 dark:bg-gray-900 max-w-7xl mx-auto">
     <h2 className="mb-4 text-center text-4xl  bg-gradient-to-r from-neutral-300 to-neutral-500 bg-clip-text text-transparent pb-5">
       AI Review Feedback
     </h2>
 
     {/* Styled Markdown Renderer */}
-    <div className="prose prose-lg dark:prose-invert max-w-none leading-relaxed text-neutral-300 px-2">
-      <ReactMarkdown remarkPlugins={[remarkGfm]}>
-        {feedback}
-      </ReactMarkdown>
+    <div className="prose not-last:text-lg dark:prose-invert max-w-none leading-relaxed text-neutral-300 px-2">
+    <ReactMarkdown
+  remarkPlugins={[remarkGfm]}
+  components={{
+    p: ({node, ...props}) => <p className="mb-6" {...props} />
+  }}
+>
+  {feedback.split('\n').map(line => line.trim()).filter(Boolean).join('\n\n')}
+</ReactMarkdown>
     </div>
   </div>
 )}
