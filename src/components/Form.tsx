@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import ReactMarkdown from "react-markdown";
 import { Loader2 } from "lucide-react";
-import { marked } from "marked";
+
 import remarkGfm from "remark-gfm";
 
 import { Button } from "@/components/ui/button";
