@@ -39,7 +39,7 @@ async function fetchPullRequestDiff(state: ReviewState): Promise<ReviewState> {
     const response = await fetch(url, {
       headers: {
         Accept: "application/vnd.github.v3.diff",
-        Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+        Authorization: `Bearer ${token}`,
       },
     });
 
@@ -132,11 +132,12 @@ async function postPRComment(state: ReviewState): Promise<void> {
   
 
   try {
+    const token=await getGitHubToken();
     const response = await fetch(url, {
       method: "POST",
       headers: {
         Accept: "application/vnd.github+json",
-        Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
+        Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
