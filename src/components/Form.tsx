@@ -119,6 +119,8 @@ export function ReviewForm() {
                 <FormControl>
                   <Input
                     type="number"
+                    min={0}
+
                     placeholder="e.g., 123"
                     {...field}
                     onChange={(e) => {

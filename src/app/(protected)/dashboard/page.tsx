@@ -31,7 +31,7 @@ export default function DashboardPage() {
   const userEmail = session?.user?.email || "";
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white selection:bg-blue-500/30">
+    <div className="min-h-screen  bg-gray-950 text-white selection:bg-blue-500/30">
       <header className="sticky top-0 z-50 border-b border-gray-800 bg-gray-950/80 backdrop-blur-md">
         <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
           {/* Logo/Brand */}
