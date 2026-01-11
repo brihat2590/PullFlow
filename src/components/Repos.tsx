@@ -65,11 +65,11 @@ export default function Repos() {
   }
 
   return (
-    <div className="min-h-screen py-12 sm:py-20 px-4 sm:px-6 lg:px-8 bg-gray-950">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen py-12 sm:py-20  bg-gray-950">
+      <div className="max-w-5xl mx-auto">
         <div className="mb-10">
           <div className="flex justify-center items-center gap-3 mb-3">
-            <div className="p-3  rounded-xl bg-slate-900/80 border border-slate-800 shadow-sm shadow-blue-500/10">
+            <div className="p-3  rounded-xl  shadow-sm shadow-blue-500/10">
               <Code2 className="w-8 h-8 " />
             </div>
             <h1 className=" sm:text-4xl bg-linear-to-r from-neutral-300 to-neutral-500 text-transparent bg-clip-text text-4xl tracking-tight ">
@@ -86,14 +86,14 @@ export default function Repos() {
               <input
                 readOnly
                 value={repos.length}
-                className="w-full px-3 py-2 rounded-lg bg-slate-900/70 border border-slate-800 text-sm text-slate-200 shadow-sm
+                className="w-full px-3 py-2 rounded-lg  border border-slate-800 text-sm text-slate-200 shadow-sm cursor-pointer
                            focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500/40
                            transition-all duration-200 ease-out
                            group-hover:border-slate-700
                            placeholder:text-slate-500"
                 placeholder="Total repositories"
               />
-              <span className="pointer-events-none absolute inset-y-0 right-3 flex items-center text-xs text-slate-500">
+              <span className=" absolute cursor-pointer inset-y-0 right-3 flex items-center text-xs text-slate-500">
                 total
               </span>
             </div>
@@ -102,7 +102,7 @@ export default function Repos() {
               <input
                 readOnly
                 value="GitHub · Updated desc · 100 per page"
-                className="w-full px-3 py-2 rounded-lg bg-slate-900/70 border border-slate-800 text-xs text-slate-300 shadow-sm
+                className="w-full px-3 py-2 rounded-lg cursor-pointer  border border-slate-800 text-xs text-slate-300 shadow-sm
                            focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/40
                            transition-all duration-200 ease-out
                            group-hover:border-slate-700
@@ -117,7 +117,7 @@ export default function Repos() {
           {repos.map((repo) => (
             <div
               key={repo.id}
-              className="group bg-slate-900/50 backdrop-blur-sm rounded-xl border border-slate-800 hover:border-blue-500/30 transition-all duration-300 hover:bg-slate-800/80 hover:shadow-xl hover:shadow-blue-500/5 overflow-hidden"
+              className="group 50 backdrop-blur-sm rounded-xl border border-white-500 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/5 overflow-hidden"
             >
               <div className="p-6 border-b border-slate-800">
                 <div className="flex items-start justify-between mb-4">

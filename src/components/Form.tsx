@@ -70,9 +70,9 @@ export function ReviewForm() {
   }
 
   return (
-    <div className="space-y-8 max-w-7xl mx-auto " >
+    <div className="space-y-8 max-w-5xl mx-auto " >
 
-        <h1 className="mt-5 pt-5 text-center bg-linear-to-r from-neutral-300 to-neutral-500 text-transparent bg-clip-text text-4xl"> AI PR review </h1>
+        <h1 className="mt-5 pt-5 text-center bg-linear-to-r from-neutral-300 to-neutral-500 text-transparent bg-clip-text text-4xl"> Get your pr reviewed </h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <div className="grid gap-4 md:grid-cols-2">
@@ -137,7 +137,7 @@ export function ReviewForm() {
             )}
           />
 
-          <Button type="submit" className="w-full" disabled={isLoading}>
+          <Button type="submit" className=" w-100" disabled={isLoading}>
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
